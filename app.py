@@ -1,5 +1,10 @@
 from flask import Flask,jsonify
 from multiprocessing import Value
+import os
+files = os.listdir(os.curdir)
+if 'count.txt' not in files:
+	with open('count.txt','w') as w:
+		w.write('0')
 with open('count.txt','r') as w:
 	prev_count= w.read()
 	count = int(prev_count)
