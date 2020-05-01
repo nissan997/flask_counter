@@ -1,9 +1,17 @@
 from flask import Flask,jsonify
 from multiprocessing import Value
-with open('count.txt','r') as w:
-	prev_count= w.read()
-	count = int(prev_count)
+
+try:
+    with open('count.txt','r') as w:
+        count= int(w.read())
+except:
+    with open('count.txt','w') as w:
+	w.write('0')
+    with open('count.txt','r') as w:
+        count=int(w.read())
+
 counter = Value('i',count)
+
 app = Flask(__name__)
 @app.route('/')
 def index():
